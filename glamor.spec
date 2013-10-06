@@ -28,8 +28,6 @@ Source0:	%{name}-%{gitdate}.%{srctype}
 %else
 Source0:	%{name}-%{version}.%{srctype}
 %endif
-#Source100:	glamor.rpmlintrc
-#Patch0:			glamor-0.5-fix-linking-with-pixman.patch
 BuildRequires:	autoconf			>= 2.63
 BuildRequires:	x11-util-macros		>= 1.17
 BuildRequires:	x11-proto-devel		>= 7.6
@@ -92,7 +90,6 @@ development files for %{libname}.
 %else
 %setup -qn %{name}-%{version}
 %endif
-#%patch0 -p1
 autoreconf -vfi
 #./autogen.sh
 
