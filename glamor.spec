@@ -10,7 +10,7 @@
 %define	release		0.git%{gitdate}.%{rel}
 %else
 %define srctype		tar.gz
-%define release		2
+%define release		3
 %endif
 
 # Otherwise it fails linking
