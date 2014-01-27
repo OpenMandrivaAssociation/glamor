@@ -2,32 +2,17 @@
 %define	libname		%mklibname %{name} %{major}
 %define	develname	%mklibname -d %{name}
 
-%define git			0
-%define gitdate		20130313
-%define	rel			1
-%if %{git}
-%define srctype		tar.gz
-%define	release		0.git%{gitdate}.%{rel}
-%else
-%define srctype		tar.gz
-%define release		5
-%endif
-
 # Otherwise it fails linking
 %define	_disable_ld_no_undefined	1
 
 Name:		glamor
-Version:	0.5.1
-Release:	%{release}
+Version:	0.6.0
+Release:	1
 Summary:	Open-source X.org graphics common driver based on the GL library
 License:	MIT
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/Glamor
-%if %{git}
-Source0:	%{name}-%{gitdate}.%{srctype}
-%else
-Source0:	%{name}-%{version}.%{srctype}
-%endif
+Source0:	%{name}-egl-%{version}.tar.gz
 BuildRequires:	autoconf			>= 2.63
 BuildRequires:	x11-util-macros		>= 1.17
 BuildRequires:	x11-proto-devel		>= 7.6
@@ -85,11 +70,7 @@ development files for %{libname}.
 
 
 %prep
-%if %{git}
-%setup -qn %{name}-%{gitdate}
-%else
-%setup -qn %{name}-%{version}
-%endif
+%setup -qn %{name}-egl-%{version}
 autoreconf -vfi
 #./autogen.sh
 
@@ -125,12 +106,10 @@ find %{buildroot} -name '*.la' -exec rm {} \;
 %{_sysconfdir}/ld.so.conf.d/%{name}.conf
 %config(noreplace) %{_sysconfdir}/X11/xorg.conf.d/05-glamor.conf
 
-
 %files -n %{libname}
 %doc COPYING README ReleaseNote
 %{_libdir}/libglamor.so.%{major}*
 %{_libdir}/xorg/modules/libglamoregl.so
-
 
 %files -n %{develname}
 %doc COPYING
@@ -138,5 +117,3 @@ find %{buildroot} -name '*.la' -exec rm {} \;
 %{_libdir}/pkgconfig/%{name}.pc
 %{_libdir}/pkgconfig/%{name}-egl.pc
 %{_includedir}/xorg/glamor.h
-
-
