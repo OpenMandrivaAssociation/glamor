@@ -81,9 +81,9 @@ autoreconf -vfi
 # --enable-debug: build debug version of glamor (default: no)
 # --enable-glx-tls: enable TLS support in GLX (default: no)
 # --with-xorg-module-dir="%%{libdir}/xorg/modules"
-%configure2_5x	--disable-static \
-				--enable-glx-tls \
-				--with-xorg-conf-dir="%{_sysconfdir}/X11/xorg.conf.d"
+%configure2_5x	--enable-glx-tls \
+		--with-xorg-conf-dir="%{_sysconfdir}/X11/xorg.conf.d" \
+		--enable-glamor-gles2
 
 %make
 
