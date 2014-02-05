@@ -7,12 +7,13 @@
 
 Name:		glamor
 Version:	0.6.0
-Release:	1
+Release:	2
 Summary:	Open-source X.org graphics common driver based on the GL library
 License:	MIT
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/Glamor
 Source0:	%{name}-egl-%{version}.tar.gz
+Patch0:		glamor-0.5-speed-up-lines.patch
 BuildRequires:	autoconf			>= 2.63
 BuildRequires:	x11-util-macros		>= 1.17
 BuildRequires:	x11-proto-devel		>= 7.6
@@ -71,6 +72,7 @@ development files for %{libname}.
 
 %prep
 %setup -qn %{name}-egl-%{version}
+%patch0 -p1 -b .speedup~
 autoreconf -vfi
 #./autogen.sh
 
@@ -81,9 +83,10 @@ autoreconf -vfi
 # --enable-debug: build debug version of glamor (default: no)
 # --enable-glx-tls: enable TLS support in GLX (default: no)
 # --with-xorg-module-dir="%%{libdir}/xorg/modules"
-%configure2_5x	--disable-static \
-				--enable-glx-tls \
-				--with-xorg-conf-dir="%{_sysconfdir}/X11/xorg.conf.d"
+%configure2_5x	--enable-glx-tls \
+		--with-xorg-conf-dir="%{_sysconfdir}/X11/xorg.conf.d" \
+		--enable-glamor-gles2 \
+		--enable-glamor-dri3
 
 %make
 

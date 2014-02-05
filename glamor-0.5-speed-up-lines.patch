@@ -1,0 +1,42 @@
+diff -up xorg-x11-glamor-20130401git81aadb8/src/glamor_polylines.c.dave xorg-x11-glamor-20130401git81aadb8/src/glamor_polylines.c
+--- xorg-x11-glamor-20130401git81aadb8/src/glamor_polylines.c.dave	2014-01-14 09:22:28.000000000 +1000
++++ xorg-x11-glamor-20130401git81aadb8/src/glamor_polylines.c	2014-01-14 09:24:37.000000000 +1000
+@@ -51,7 +51,7 @@ _glamor_poly_lines(DrawablePtr drawable,
+ 		/* This ends up in miSetSpans, which is accelerated as well as we
+ 		 * can hope X wide lines will be.
+ 		 */
+-		goto wide_line;
++		goto fail;
+ 	}
+ 	if (gc->lineStyle != LineSolid) {
+ 		glamor_fallback
+@@ -104,18 +104,17 @@ _glamor_poly_lines(DrawablePtr drawable,
+ 	    && glamor_ddx_fallback_check_gc(gc))
+ 		return FALSE;
+ 
+-	if (gc->lineWidth == 0) {
+-		if (glamor_prepare_access(drawable, GLAMOR_ACCESS_RW)) {
+-			if (glamor_prepare_access_gc(gc)) {
+-				fbPolyLine(drawable, gc, mode, n, points);
+-				glamor_finish_access_gc(gc);
+-			}
+-			glamor_finish_access(drawable, GLAMOR_ACCESS_RW);
+-		}
+-	} else {
+-wide_line:
+-		/* fb calls mi functions in the lineWidth != 0 case. */
+-		fbPolyLine(drawable, gc, mode, n, points);
++        switch (gc->lineStyle) {
++	case LineSolid:
++		if (gc->lineWidth == 0)
++			miZeroLine(drawable, gc, mode, n, points);
++		else
++			miWideLine(drawable, gc, mode, n, points);
++		break;
++	case LineOnOffDash:
++	case LineDoubleDash:
++		miWideDash(drawable, gc, mode, n, points);
++		break;
+ 	}
+ 	return TRUE;
+ }
