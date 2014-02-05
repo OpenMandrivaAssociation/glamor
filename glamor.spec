@@ -2,9 +2,6 @@
 %define	libname		%mklibname %{name} %{major}
 %define	develname	%mklibname -d %{name}
 
-# Otherwise it fails linking
-%define	_disable_ld_no_undefined	1
-
 Name:		glamor
 Version:	0.6.0
 Release:	1
