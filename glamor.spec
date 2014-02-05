@@ -10,6 +10,7 @@ License:	MIT
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/Glamor
 Source0:	%{name}-egl-%{version}.tar.gz
+Patch0:		glamor-0.5-speed-up-lines.patch
 BuildRequires:	autoconf			>= 2.63
 BuildRequires:	x11-util-macros		>= 1.17
 BuildRequires:	x11-proto-devel		>= 7.6
@@ -68,6 +69,7 @@ development files for %{libname}.
 
 %prep
 %setup -qn %{name}-egl-%{version}
+%patch0 -p1 -b .speedup~
 autoreconf -vfi
 #./autogen.sh
 
