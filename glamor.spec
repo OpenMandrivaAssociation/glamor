@@ -80,7 +80,8 @@ autoreconf -vfi
 # --with-xorg-module-dir="%%{libdir}/xorg/modules"
 %configure2_5x	--enable-glx-tls \
 		--with-xorg-conf-dir="%{_sysconfdir}/X11/xorg.conf.d" \
-		--enable-glamor-gles2
+		--enable-glamor-gles2 \
+		--enable-glamor-dri3
 
 %make
 
