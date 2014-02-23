@@ -7,7 +7,7 @@
 
 Name:		glamor
 Version:	0.6.0
-Release:	2
+Release:	3
 Summary:	Open-source X.org graphics common driver based on the GL library
 License:	MIT
 Group:		System/Libraries
@@ -21,7 +21,8 @@ BuildRequires:	pkgconfig(pixman-1)	>= 0.29.2
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(gbm)
 BuildRequires:	pkgconfig(gl)
-BuildRequires:	pkgconfig(glesv2)
+# (proyvind: conflicts with GL)
+#BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	pkgconfig(libdrm)	>= 2.4.42
 BuildRequires:	pkgconfig(xorg-server)
 
@@ -85,7 +86,7 @@ autoreconf -vfi
 # --with-xorg-module-dir="%%{libdir}/xorg/modules"
 %configure2_5x	--enable-glx-tls \
 		--with-xorg-conf-dir="%{_sysconfdir}/X11/xorg.conf.d" \
-		--enable-glamor-gles2 \
+		--disable-glamor-gles2 \
 		--enable-glamor-dri3
 
 %make
