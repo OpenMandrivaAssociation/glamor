@@ -7,7 +7,7 @@
 
 Name:		glamor
 Version:	0.6.0
-Release:	4
+Release:	5
 Summary:	Open-source X.org graphics common driver based on the GL library
 License:	MIT
 Group:		System/Libraries
