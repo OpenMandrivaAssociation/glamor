@@ -11,7 +11,7 @@ Release:	6
 Summary:	Open-source X.org graphics common driver based on the GL library
 License:	MIT
 Group:		System/Libraries
-Url:		http://www.freedesktop.org/wiki/Software/Glamor
+Url:		https://www.freedesktop.org/wiki/Software/Glamor
 Source0:	%{name}-egl-%{version}.tar.gz
 Patch0:		glamor-0.5-speed-up-lines.patch
 BuildRequires:	autoconf			>= 2.63
