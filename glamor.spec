@@ -14,6 +14,10 @@ Group:		System/Libraries
 Url:		https://www.freedesktop.org/wiki/Software/Glamor
 Source0:	%{name}-egl-%{version}.tar.gz
 Patch0:		glamor-0.5-speed-up-lines.patch
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	autoconf			>= 2.63
 BuildRequires:	x11-util-macros		>= 1.17
 BuildRequires:	x11-proto-devel		>= 7.6
